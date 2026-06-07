@@ -201,26 +201,14 @@ function switchTab(tabName) {
             renderProcessSteps();
         }
 
-        // Trigger scroll reveal
-        requestAnimationFrame(() => {
-            revealProcessSteps();
+        // Staggered reveal: 逐条渐显，不依赖 IntersectionObserver
+        const steps = processTimeline.querySelectorAll('.process-step');
+        steps.forEach((step, i) => {
+            setTimeout(() => {
+                step.classList.add('process-step--visible');
+            }, i * 100);
         });
     }
-}
-
-// ==================== 工艺步骤滚动显示 ====================
-function revealProcessSteps() {
-    const steps = processTimeline.querySelectorAll('.process-step');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('process-step--visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
-
-    steps.forEach(step => observer.observe(step));
 }
 
 // ==================== 事件绑定 ====================
