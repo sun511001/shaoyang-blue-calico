@@ -84,6 +84,31 @@
                 </svg>
                 制作工艺
             </button>
+            <button class="nav__tab" data-tab="survey">
+                <svg class="nav__icon" width="20" height="20" viewBox="0 0 20 20">
+                    <rect x="3" y="2" width="14" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.7"/>
+                    <line x1="6" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+                    <line x1="6" y1="10" x2="14" y2="10" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+                    <line x1="6" y1="13" x2="11" y2="13" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+                </svg>
+                问卷收集
+            </button>
+            <button class="nav__tab" data-tab="visualize">
+                <svg class="nav__icon" width="20" height="20" viewBox="0 0 20 20">
+                    <rect x="2" y="12" width="3" height="6" rx="0.5" fill="currentColor" opacity="0.5"/>
+                    <rect x="6" y="7" width="3" height="11" rx="0.5" fill="currentColor" opacity="0.6"/>
+                    <rect x="10" y="4" width="3" height="14" rx="0.5" fill="currentColor" opacity="0.7"/>
+                    <rect x="14" y="9" width="3" height="9" rx="0.5" fill="currentColor" opacity="0.5"/>
+                </svg>
+                数据可视
+            </button>
+            <button class="nav__tab" data-tab="game">
+                <svg class="nav__icon" width="20" height="20" viewBox="0 0 20 20">
+                    <circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.7"/>
+                    <polygon points="8,6 14,10 8,14" fill="currentColor" opacity="0.5"/>
+                </svg>
+                趣味闯关
+            </button>
         </div>
     </nav>
 
@@ -140,6 +165,48 @@
             </div>
         </section>
 
+        <!-- ============ Survey Section ============ -->
+        <section class="section section--survey" id="section-survey" style="display:none;">
+            <h2 class="section__title">
+                <span class="section__title-decor left"></span>
+                蓝印花布 · 问卷调查
+                <span class="section__title-decor right"></span>
+            </h2>
+            <p class="section__subtitle">您的回答将帮助我们了解公众对非遗的认知</p>
+
+            <div id="survey-container">
+                <!-- JS rendered -->
+            </div>
+        </section>
+
+        <!-- ============ Visualize Section ============ -->
+        <section class="section section--visualize" id="section-visualize" style="display:none;">
+            <h2 class="section__title">
+                <span class="section__title-decor left"></span>
+                问卷数据 · 可视化
+                <span class="section__title-decor right"></span>
+            </h2>
+            <p class="section__subtitle">基于真实问卷反馈的数据分析</p>
+
+            <div id="visualize-container">
+                <!-- JS rendered -->
+            </div>
+        </section>
+
+        <!-- ============ Game Section ============ -->
+        <section class="section section--game" id="section-game" style="display:none;">
+            <h2 class="section__title">
+                <span class="section__title-decor left"></span>
+                蓝印花布 · 趣味闯关
+                <span class="section__title-decor right"></span>
+            </h2>
+            <p class="section__subtitle">测一测你对蓝印花布了解多少</p>
+
+            <div id="game-container">
+                <!-- JS rendered -->
+            </div>
+        </section>
+
     </main>
 
     <!-- ==================== Pattern Detail Modal ==================== -->
@@ -192,6 +259,10 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/survey.js"></script>
+    <script src="js/visualize.js"></script>
+    <script src="js/game.js"></script>
 </body>
 </html>
