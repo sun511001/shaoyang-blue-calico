@@ -1265,8 +1265,8 @@ input { font-family: inherit; }
 .ws-step-area { background:var(--white); border-radius:var(--radius-md); border:1px solid var(--border); padding:28px 24px; min-height:200px; box-shadow:var(--shadow-sm); }
 
 /* Task */
-.ws-task__title { font-family:var(--font-heading); font-size:18px; color:var(--indigo-dark); letter-spacing:2px; margin-bottom:8px; }
-.ws-task__hint { font-size:14px; color:var(--text-muted); letter-spacing:1px; margin-bottom:20px; }
+.ws-task__title { font-family:var(--font-heading); font-size:18px; color:var(--indigo-dark); letter-spacing:2px; margin-bottom:8px; text-align:center; }
+.ws-task__hint { font-size:14px; color:var(--text-muted); letter-spacing:1px; margin-bottom:20px; text-align:center; }
 .ws-task__btns { text-align:center; margin-top:16px; }
 
 /* Cards (Step1) */
