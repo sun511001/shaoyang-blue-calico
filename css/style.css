@@ -1243,8 +1243,8 @@ input { font-family: inherit; }
 .ws-progress-bar__fill { height:100%; background:linear-gradient(to right,var(--indigo),var(--indigo-medium)); border-radius:3px; transition:width 0.5s ease; }
 
 /* Stations */
-.ws-stations { display:flex; justify-content:center; gap:0; margin-bottom:28px; position:relative; }
-.ws-station { text-align:center; flex:1; max-width:100px; padding:8px 4px; border-radius:8px; transition:all 0.3s; position:relative; }
+.ws-stations { display:flex; justify-content:center; gap:0; margin-bottom:20px; position:relative; }
+.ws-station { text-align:center; flex:1; max-width:110px; padding:12px 6px; border-radius:8px; transition:all 0.3s; position:relative; }
 .ws-station::after { content:''; position:absolute; top:22px; right:-2px; width:8px; height:2px; background:var(--indigo-pale); }
 .ws-station:last-child::after { display:none; }
 .ws-station__icon { display:block; font-size:22px; margin-bottom:4px; }
@@ -1256,13 +1256,13 @@ input { font-family: inherit; }
 .ws-station--active .ws-station__name { color:var(--indigo-dark); font-weight:700; }
 
 /* Character */
-.ws-char { position:relative; height:40px; margin-bottom:16px; transition:left 0.5s ease; z-index:1; }
+.ws-char { position:relative; height:48px; margin-bottom:20px; transition:left 0.5s ease; z-index:1; }
 .ws-char__body { font-size:32px; position:absolute; transform:translateX(-50%); display:block; text-align:center; width:40px; }
 .ws-char--arrived .ws-char__body { animation:wsBounce 0.4s ease; }
 @keyframes wsBounce { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(-10px);} }
 
 /* Step Area */
-.ws-step-area { background:var(--white); border-radius:var(--radius-md); border:1px solid var(--border); padding:28px 24px; min-height:200px; box-shadow:var(--shadow-sm); }
+.ws-step-area { background:var(--white); border-radius:var(--radius-md); border:1px solid var(--border); padding:36px 32px; min-height:220px; box-shadow:var(--shadow-sm); }
 
 /* Task */
 .ws-task__title { font-family:var(--font-heading); font-size:18px; color:var(--indigo-dark); letter-spacing:2px; margin-bottom:8px; text-align:center; }
