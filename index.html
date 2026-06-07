@@ -109,6 +109,15 @@
                 </svg>
                 趣味闯关
             </button>
+            <button class="nav__tab" data-tab="products">
+                <svg class="nav__icon" width="20" height="20" viewBox="0 0 20 20">
+                    <rect x="2" y="2" width="7" height="7" rx="1" fill="currentColor" opacity="0.5"/>
+                    <rect x="11" y="2" width="7" height="7" rx="1" fill="currentColor" opacity="0.7"/>
+                    <rect x="2" y="11" width="7" height="7" rx="1" fill="currentColor" opacity="0.6"/>
+                    <rect x="11" y="11" width="7" height="7" rx="1" fill="currentColor" opacity="0.5"/>
+                </svg>
+                成果展示
+            </button>
         </div>
     </nav>
 
@@ -207,9 +216,48 @@
             </div>
         </section>
 
+        <!-- ============ Products Section ============ -->
+        <section class="section section--products" id="section-products" style="display:none;">
+            <h2 class="section__title">
+                <span class="section__title-decor left"></span>
+                蓝印花布 · 成果展示
+                <span class="section__title-decor right"></span>
+            </h2>
+            <p class="section__subtitle">传统工艺融入现代生活的精美制品</p>
+
+            <div id="products-container">
+                <!-- JS rendered -->
+            </div>
+        </section>
+
     </main>
 
-    <!-- ==================== Pattern Detail Modal ==================== -->
+    <!-- ==================== About Us ==================== -->
+    <section class="about" id="section-about">
+        <div class="about__inner">
+            <h2 class="about__title">关于我们</h2>
+            <p class="about__subtitle">三下乡社会实践团队 · 湖南邵阳</p>
+            <div class="about__cards">
+                <div class="about__card">
+                    <div class="about__card-icon">🏫</div>
+                    <h3>实践背景</h3>
+                    <p>我们是一支关注非物质文化遗产保护的大学生三下乡社会实践团队，深入湖南邵阳地区，探访蓝印花布传统印染技艺的传承现状。</p>
+                </div>
+                <div class="about__card">
+                    <div class="about__card-icon">🎯</div>
+                    <h3>项目目标</h3>
+                    <p>通过实地调研、影像记录和数字化展示，让更多人了解邵阳蓝印花布的文化价值，唤起社会对非遗保护的关注与参与。</p>
+                </div>
+                <div class="about__card">
+                    <div class="about__card-icon">🤝</div>
+                    <h3>联系方式</h3>
+                    <p>如果您对蓝印花布非遗保护有任何建议或合作意向，欢迎通过问卷留言与我们交流，共同守护这份珍贵的文化遗产。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== Footer ==================== -->
     <div class="modal-overlay" id="modal-overlay">
         <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
             <button class="modal__close" id="modal-close" aria-label="关闭">
