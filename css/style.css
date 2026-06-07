@@ -161,11 +161,12 @@ input { font-family: inherit; }
 }
 
 .nav__tabs {
-    max-width: 500px;
+    max-width: 900px;
     margin: 0 auto;
     display: flex;
-    gap: 4px;
+    gap: 8px;
     padding: 8px 16px;
+    justify-content: center;
 }
 
 .nav__tab {
@@ -173,17 +174,18 @@ input { font-family: inherit; }
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 12px 28px;
-    font-size: 16px;
+    gap: 6px;
+    padding: 12px 10px;
+    font-size: 15px;
     font-weight: 500;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     color: var(--text-secondary);
     background: transparent;
     border: none;
     border-radius: var(--radius-sm);
     transition: var(--transition);
     position: relative;
+    white-space: nowrap;
 }
 
 .nav__tab:hover {
