@@ -183,13 +183,8 @@ function initSurvey() {
     renderSurveyForm(container);
 }
 
-// Expose globally
 window.initSurvey = initSurvey;
 window.retakeSurvey = retakeSurvey;
 
-// Auto-init on page load
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSurvey);
-} else {
-    initSurvey();
-}
+// Auto-init
+initSurvey();

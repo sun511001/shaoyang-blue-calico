@@ -348,4 +348,4 @@ function showResult() {
 }
 
 window.initGame = initGame;
-if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initGame); } else { initGame(); }
+initGame();

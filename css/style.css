@@ -1374,6 +1374,7 @@ input { font-family: inherit; }
 .page-nav { max-width:var(--max-width); margin:0 auto; padding:16px 24px 0; }
 .page-nav__back { display:inline-flex; align-items:center; gap:6px; font-size:14px; color:var(--indigo); text-decoration:none; letter-spacing:1px; transition:var(--transition); }
 .page-nav__back:hover { color:var(--indigo-dark); }
+.page-nav__sep { color:var(--text-muted); margin:0 4px; }
 
 /* ---------- Products ---------- */
 .product-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }

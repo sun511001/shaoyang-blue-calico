@@ -180,4 +180,4 @@ function initVisualize() {
 
 window.addEventListener('resize', handleResize);
 window.initVisualize = initVisualize;
-if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initVisualize); } else { initVisualize(); }
+initVisualize();
