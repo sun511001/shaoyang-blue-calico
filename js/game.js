@@ -155,22 +155,71 @@ function step2(area) {
 
 /* ---------- Step 3: Mix ---------- */
 function step3(area) {
-    var soy=0, lime=0;
+    var soy=0, lime=0, stirred=false;
     function draw() {
         var ok = (soy===3 && lime===1);
         var buf = '<div class="ws-task"><h3 class="ws-task__title">第3关 · 调制防染浆</h3><p class="ws-task__hint">正确配方：<strong>3份黄豆粉 + 1份石灰</strong></p>';
-        buf += '<div class="ws-mix"><div class="ws-mix__bowl"><span class="ws-mix__bowl-icon">🫗</span><div class="ws-mix__level" style="height:'+((soy+lime)*16)+'px"></div></div><div class="ws-mix__ingredients">';
+        buf += '<div class="ws-mix"><div class="ws-mix__ingredients">';
         buf += '<div class="ws-mix__item"><span>🟡 黄豆粉</span><button class="ws-mix__btn" id="ws-soy-plus">+</button><span class="ws-mix__count">'+soy+'</span><button class="ws-mix__btn" id="ws-soy-minus"'+ (soy===0?' disabled':'')+'>-</button></div>';
         buf += '<div class="ws-mix__item"><span>⬜ 石灰</span><button class="ws-mix__btn" id="ws-lime-plus">+</button><span class="ws-mix__count">'+lime+'</span><button class="ws-mix__btn" id="ws-lime-minus"'+ (lime===0?' disabled':'')+'>-</button></div>';
         buf += '</div></div>';
-        if (ok) buf += '<button class="ws-btn" id="ws-mix-go">搅拌！</button>';
+        if (ok && !stirred) {
+            buf += '<p class="ws-task__hint" style="margin-top:16px;color:var(--indigo);">配方正确！请在碗中<strong>画圈搅拌</strong>🫗</p>';
+            buf += '<div class="ws-stir" id="ws-stir-area"><div class="ws-stir__bowl"><span class="ws-stir__icon">🫗</span><div class="ws-stir__level" style="height:'+((soy+lime)*16)+'px"></div><span class="ws-stir__spoon" id="ws-spoon">🥄</span></div><div class="ws-stir__progress"><div class="ws-stir__bar" id="ws-stir-bar" style="width:0%"></div></div><p class="ws-stir__pct" id="ws-stir-pct">搅拌 0%</p></div>';
+        }
         buf += '<div id="ws-fb3"></div></div>';
         area.innerHTML = buf;
-        var sa = area.querySelector('#ws-soy-plus'); if(sa) sa.addEventListener('click',function(){soy++;draw();});
-        var ss = area.querySelector('#ws-soy-minus'); if(ss) ss.addEventListener('click',function(){if(soy>0){soy--;draw();}});
-        var la = area.querySelector('#ws-lime-plus'); if(la) la.addEventListener('click',function(){lime++;draw();});
-        var ls = area.querySelector('#ws-lime-minus'); if(ls) ls.addEventListener('click',function(){if(lime>0){lime--;draw();}});
-        if (ok) area.querySelector('#ws-mix-go').addEventListener('click',function(){game.score++;area.querySelector('#ws-fb3').innerHTML='<div class="ws-fb ws-fb--ok">✅ 比例完美！防染浆调制成功！</div>';stepDone(area);});
+
+        var sa = area.querySelector('#ws-soy-plus'); if(sa) sa.addEventListener('click',function(){soy++;stirred=false;draw();});
+        var ss = area.querySelector('#ws-soy-minus'); if(ss) ss.addEventListener('click',function(){if(soy>0){soy--;stirred=false;draw();}});
+        var la = area.querySelector('#ws-lime-plus'); if(la) la.addEventListener('click',function(){lime++;stirred=false;draw();});
+        var ls = area.querySelector('#ws-lime-minus'); if(ls) ls.addEventListener('click',function(){if(lime>0){lime--;stirred=false;draw();}});
+
+        if (ok && !stirred) {
+            var stirArea = area.querySelector('#ws-stir-area');
+            if (stirArea) {
+                var totalAngle=0, lastAngle=null, stirDone=false;
+                stirArea.addEventListener('mousedown',function(e){e.preventDefault();});
+                stirArea.addEventListener('mousemove',function(e){
+                    if(stirDone) return;
+                    var rect=stirArea.getBoundingClientRect();
+                    var cx=rect.left+rect.width/2, cy=rect.top+rect.height/2-10;
+                    var angle=Math.atan2(e.clientY-cy, e.clientX-cx);
+                    if(lastAngle!==null){
+                        var diff=angle-lastAngle;
+                        if(diff>Math.PI) diff-=Math.PI*2;
+                        if(diff<-Math.PI) diff+=Math.PI*2;
+                        totalAngle+=Math.abs(diff);
+                    }
+                    lastAngle=angle;
+                    var pct=Math.min(Math.round(totalAngle/(Math.PI*10)*100),100);
+                    area.querySelector('#ws-stir-bar').style.width=pct+'%';
+                    area.querySelector('#ws-stir-pct').textContent='搅拌 '+pct+'%';
+                    if(pct>=100) { stirDone=true; stirred=true; game.score++;
+                        area.querySelector('#ws-fb3').innerHTML='<div class="ws-fb ws-fb--ok">✅ 搅拌完成！防染浆调制成功！</div>';stepDone(area); }
+                });
+                stirArea.addEventListener('touchstart',function(e){e.preventDefault();});
+                stirArea.addEventListener('touchmove',function(e){
+                    e.preventDefault();
+                    if(stirDone) return;
+                    var rect=stirArea.getBoundingClientRect();
+                    var t=e.touches[0], cx=rect.left+rect.width/2, cy=rect.top+rect.height/2-10;
+                    var angle=Math.atan2(t.clientY-cy, t.clientX-cx);
+                    if(lastAngle!==null){
+                        var diff=angle-lastAngle;
+                        if(diff>Math.PI) diff-=Math.PI*2;
+                        if(diff<-Math.PI) diff+=Math.PI*2;
+                        totalAngle+=Math.abs(diff);
+                    }
+                    lastAngle=angle;
+                    var pct=Math.min(Math.round(totalAngle/(Math.PI*10)*100),100);
+                    area.querySelector('#ws-stir-bar').style.width=pct+'%';
+                    area.querySelector('#ws-stir-pct').textContent='搅拌 '+pct+'%';
+                    if(pct>=100) { stirDone=true; stirred=true; game.score++;
+                        area.querySelector('#ws-fb3').innerHTML='<div class="ws-fb ws-fb--ok">✅ 搅拌完成！防染浆调制成功！</div>';stepDone(area); }
+                });
+            }
+        }
     }
     draw();
 }
@@ -185,20 +234,62 @@ function step4(area) {
     cloth.addEventListener('touchstart',function(e){e.preventDefault();cloth.click();});
 }
 
-/* ---------- Step 5: Dye ---------- */
+/* ---------- Step 5: Dye (drag) ---------- */
 function step5(area) {
-    var cycle=0, state='idle', D=2000, O=2000;
+    var cycle=0, state='idle'; // idle | dipping | oxidizing
+    var clothTop=8, vatTop=55, dipTarget=58, timer=null;
     function draw() {
-        var buf = '<div class="ws-task"><h3 class="ws-task__title">第5关 · 浸染蓝靛</h3><p class="ws-task__hint">反复浸染 3 次，每次浸2秒取出氧化2秒</p><div class="ws-dye"><div class="ws-dye__vat"><span class="ws-dye__cloth-icon" style="top:'+(state==='dipping'?'60%':'10%')+'">🧶</span><div class="ws-dye__liquid"></div></div><div class="ws-dye__info"><p>已完成：<strong>'+cycle+' / 3</strong> 次</p><div class="ws-dye__swatches">';
+        var topPos = state==='dipping' ? dipTarget : (state==='oxidizing' ? 30 : clothTop);
+        var buf = '<div class="ws-task"><h3 class="ws-task__title">第5关 · 浸染蓝靛</h3><p class="ws-task__hint">拖动布匹 <strong>浸入染缸</strong> 等待2秒 → 拉出 <strong>氧化</strong>2秒，反复3次</p>';
+        buf += '<div class="ws-dye"><div class="ws-dye__vat" id="ws-vat"><span class="ws-dye__cloth-icon" id="ws-cloth-icon" style="top:'+topPos+'px">🧶</span><div class="ws-dye__liquid"></div></div>';
+        buf += '<div class="ws-dye__info"><p>已完成：<strong>'+cycle+' / 3</strong> 次</p><div class="ws-dye__swatches">';
         for (var i=1;i<=3;i++) buf += '<span class="ws-dye__swatch" style="background:'+(i<=cycle?'var(--indigo-dark)':'var(--indigo-pale)')+'"></span>';
-        buf += '</div></div>';
-        if (state==='idle'&&cycle<3) buf += '<button class="ws-btn" id="ws-dip">浸入染缸 🫧</button>';
-        if (state==='dipping') buf += '<p class="ws-dye__status">浸染中…2秒后自动取出</p>';
+        buf += '</div></div></div>';
+        if (state==='idle' && cycle<3) buf += '<p class="ws-dye__hint" style="margin-top:12px;color:var(--indigo);">👆 拖拽布匹向下浸入染缸</p>';
+        if (state==='dipping') buf += '<p class="ws-dye__status">浸染中…2秒后拉出</p>';
         if (state==='oxidizing') buf += '<p class="ws-dye__status">氧化中…2秒后完成</p>';
-        buf += '</div><div id="ws-fb5"></div></div>';
+        buf += '<div id="ws-fb5"></div></div>';
         area.innerHTML = buf;
-        var btn=area.querySelector('#ws-dip');
-        if(btn) btn.addEventListener('click',function(){state='dipping';draw();setTimeout(function(){state='oxidizing';draw();setTimeout(function(){cycle++;state='idle';if(cycle>=3){game.score++;area.querySelector('#ws-fb5').innerHTML='<div class="ws-fb ws-fb--ok">✅ 靛蓝深邃！浸染完成！</div>';stepDone(area);}else draw();},O);},D);});
+
+        if (state==='idle' && cycle<3) {
+            var cloth = area.querySelector('#ws-cloth-icon');
+            if (!cloth) return;
+            cloth.style.cursor = 'grab';
+            var dragging=false, startY=0, origTop=clothTop;
+
+            cloth.addEventListener('mousedown',function(e){e.preventDefault();dragging=true;startY=e.clientY;origTop=parseInt(cloth.style.top)||clothTop;cloth.style.cursor='grabbing';});
+            document.addEventListener('mousemove',function(e){
+                if(!dragging) return;
+                var dy=e.clientY-startY, newTop=Math.max(clothTop,Math.min(dipTarget,origTop+dy));
+                cloth.style.top=newTop+'px';
+                if(newTop>=dipTarget-3 && state==='idle') {
+                    dragging=false; cloth.style.cursor='grab'; state='dipping'; draw();
+                    timer=setTimeout(function(){state='oxidizing';draw();
+                        timer=setTimeout(function(){cycle++;state='idle';clearTimeout(timer);
+                            if(cycle>=3){game.score++;area.querySelector('#ws-fb5').innerHTML='<div class="ws-fb ws-fb--ok">✅ 靛蓝深邃！浸染完成！</div>';stepDone(area);}else draw();
+                        },2000);
+                    },2000);
+                }
+            });
+            document.addEventListener('mouseup',function(){dragging=false;cloth.style.cursor='grab';});
+
+            // Touch
+            cloth.addEventListener('touchstart',function(e){e.preventDefault();dragging=true;var t=e.touches[0];startY=t.clientY;origTop=parseInt(cloth.style.top)||clothTop;});
+            document.addEventListener('touchmove',function(e){
+                if(!dragging) return;
+                var t=e.touches[0], dy=t.clientY-startY, newTop=Math.max(clothTop,Math.min(dipTarget,origTop+dy));
+                cloth.style.top=newTop+'px';
+                if(newTop>=dipTarget-3 && state==='idle') {
+                    dragging=false; state='dipping'; draw();
+                    timer=setTimeout(function(){state='oxidizing';draw();
+                        timer=setTimeout(function(){cycle++;state='idle';clearTimeout(timer);
+                            if(cycle>=3){game.score++;area.querySelector('#ws-fb5').innerHTML='<div class="ws-fb ws-fb--ok">✅ 靛蓝深邃！浸染完成！</div>';stepDone(area);}else draw();
+                        },2000);
+                    },2000);
+                }
+            },{passive:false});
+            document.addEventListener('touchend',function(){dragging=false;});
+        }
     }
     draw();
 }

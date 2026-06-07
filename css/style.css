@@ -1311,13 +1311,25 @@ input { font-family: inherit; }
 
 /* Dye (Step5) */
 .ws-dye { display:flex; gap:20px; align-items:center; justify-content:center; flex-wrap:wrap; }
-.ws-dye__vat { width:80px; height:120px; border:3px solid var(--indigo-dark); border-radius:0 0 20px 20px; background:linear-gradient(to bottom, transparent 30%, rgba(36,113,163,0.3) 30%, rgba(36,113,163,0.4) 100%); position:relative; overflow:hidden; }
-.ws-dye__cloth-icon { position:absolute; left:50%; transform:translateX(-50%); font-size:28px; transition:top 0.6s ease; z-index:1; }
-.ws-dye__liquid { position:absolute; bottom:0; width:100%; height:50%; background:rgba(27,79,114,0.5); }
+.ws-dye__vat { width:80px; height:150px; border:3px solid var(--indigo-dark); border-radius:0 0 20px 20px; background:linear-gradient(to bottom, transparent 30%, rgba(36,113,163,0.3) 30%, rgba(36,113,163,0.4) 100%); position:relative; overflow:visible; }
+.ws-dye__cloth-icon { position:absolute; left:50%; transform:translateX(-50%); font-size:28px; z-index:1; cursor:grab; user-select:none; transition:top 0.1s; }
+.ws-dye__cloth-icon:active { cursor:grabbing; }
+.ws-dye__liquid { position:absolute; bottom:0; width:100%; height:45%; background:rgba(27,79,114,0.5); }
 .ws-dye__info { text-align:center; }
 .ws-dye__swatches { display:flex; gap:6px; justify-content:center; margin-top:8px; }
 .ws-dye__swatch { width:24px; height:24px; border-radius:4px; display:inline-block; border:1px solid var(--border); transition:background 0.4s; }
 .ws-dye__status { color:var(--gold); font-size:14px; letter-spacing:1px; animation:pulse 1s ease-in-out infinite; }
+.ws-dye__hint { font-size:13px; letter-spacing:1px; text-align:center; }
+
+/* Stir (Step3) */
+.ws-stir { text-align:center; margin-top:16px; }
+.ws-stir__bowl { width:100px; height:100px; border:3px solid var(--indigo-dark); border-radius:50%; position:relative; margin:0 auto 12px; background:var(--indigo-wash); overflow:hidden; }
+.ws-stir__icon { position:absolute; top:30px; left:50%; transform:translateX(-50%); font-size:24px; z-index:1; }
+.ws-stir__level { position:absolute; bottom:0; width:100%; background:rgba(36,113,163,0.25); border-radius:0 0 50% 50%; transition:height 0.3s; }
+.ws-stir__spoon { position:absolute; top:10px; left:50%; transform:translateX(-50%); font-size:20px; z-index:2; pointer-events:none; }
+.ws-stir__progress { width:160px; height:8px; background:var(--indigo-pale); border-radius:4px; margin:0 auto 6px; overflow:hidden; }
+.ws-stir__bar { height:100%; background:var(--indigo); border-radius:4px; transition:width 0.15s; }
+.ws-stir__pct { font-size:13px; color:var(--indigo-dark); letter-spacing:1px; }
 
 /* Reveal (Step6) */
 .ws-reveal { width:260px; height:260px; margin:0 auto 12px; position:relative; border-radius:var(--radius-md); overflow:hidden; }
