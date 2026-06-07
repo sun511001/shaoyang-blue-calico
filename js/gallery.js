@@ -1,0 +1,99 @@
+/* ============================================================
+   邵阳蓝印花布 · 纹样图鉴 — 独立页面版
+   ============================================================ */
+
+var allPatterns = [];
+var currentCategory = '全部';
+var currentSearch = '';
+
+var patternGrid = document.getElementById('pattern-grid');
+var emptyState = document.getElementById('empty-state');
+var categoryFilters = document.getElementById('category-filters');
+var searchInput = document.getElementById('search-input');
+var modalOverlay = document.getElementById('modal-overlay');
+var modalClose = document.getElementById('modal-close');
+var modalTitle = document.getElementById('modal-title');
+var modalCategory = document.getElementById('modal-category');
+var modalImage = document.getElementById('modal-image');
+var modalMeaning = document.getElementById('modal-meaning');
+var modalSymbolism = document.getElementById('modal-symbolism');
+var modalUsage = document.getElementById('modal-usage');
+
+var FALLBACK_PATTERNS = [
+    { id:1, name:"凤穿牡丹", category:"花鸟鱼虫", image:"", meaning:"凤凰与牡丹组合纹样，凤凰为百鸟之王，牡丹为百花之王，二者结合象征富贵吉祥、天下太平。", symbolism:"富贵吉祥、天下太平", usage:"常用于被面、帐檐、门帘等婚庆用品" },
+    { id:2, name:"鱼跃龙门", category:"花鸟鱼虫", image:"", meaning:"鲤鱼跃过龙门化为龙的传说，比喻科举高中、金榜题名，也象征奋发向上、功成名就。", symbolism:"金榜题名、步步高升", usage:"常用于学子的包袱布、书套、床单等" },
+    { id:3, name:"鸳鸯戏水", category:"花鸟鱼虫", image:"", meaning:"鸳鸯雌雄相伴、形影不离，象征夫妻恩爱、白头偕老，是民间最常用的爱情象征纹样。", symbolism:"夫妻和睦、婚姻美满", usage:"多用于新婚被面、枕套、帐帘等婚嫁用品" },
+    { id:4, name:"龙凤呈祥", category:"祥瑞神兽", image:"", meaning:"龙与凤组合，龙为鳞虫之长，凤为百鸟之王，龙飞凤舞象征婚姻美满、夫妻和美、吉祥如意。", symbolism:"婚姻美满、阴阳和谐", usage:"常用于婚庆被面、喜帐、门帘等大喜场合" },
+    { id:5, name:"松鹤延年", category:"祥瑞神兽", image:"", meaning:"松树四季常青象征长寿，仙鹤为仙界之鸟也象征长生，松鹤组合寓意健康长寿、延年益寿。", symbolism:"健康长寿、福寿康宁", usage:"常用于老人祝寿的被面、衣料、寿帐等" },
+    { id:6, name:"福禄寿喜", category:"吉祥文字", image:"", meaning:"以福、禄、寿、喜四个吉祥文字为主体，配合蝙蝠（福）、鹿（禄）、寿桃（寿）、喜鹊（喜）等图案，表达对人生四大幸福的美好祝愿。", symbolism:"多福多禄、长寿喜庆", usage:"广泛用于各类被面、包袱布、门帘、桌围等" },
+    { id:7, name:"梅兰竹菊", category:"花鸟鱼虫", image:"", meaning:"梅花傲雪、兰花幽香、翠竹有节、秋菊耐寒，合称“四君子”，象征君子高尚品格——傲、幽、坚、淡。", symbolism:"高洁品格、君子之风", usage:"多用于文人雅士的衣料、帷幔、屏风、桌围等" },
+    { id:8, name:"花开富贵", category:"花鸟鱼虫", image:"", meaning:"以盛开的牡丹花为主体，花朵硕大饱满、层层叠叠，象征荣华富贵、兴旺发达，是民间最受欢迎的吉祥纹样之一。", symbolism:"荣华富贵、家业兴旺", usage:"广泛用于被面、门帘、衣料、桌围等各类用品" },
+    { id:9, name:"麒麟送子", category:"祥瑞神兽", image:"", meaning:"麒麟为仁兽，传说中麒麟脚踩祥云、口衔玉书，将聪慧的孩子送到人间，寓意早生贵子、子孙贤德。", symbolism:"早生贵子、子孙贤德", usage:"常用于新婚被面、婴儿襁褓、儿童肚兜等" },
+    { id:10, name:"回纹不断", category:"几何纹样", image:"", meaning:"回纹由横竖短线折绕组成，形如“回”字，线条连绵不断、环环相扣，寓意福寿吉祥、源远流长、生生不息。", symbolism:"源远流长、生生不息", usage:"多用作边饰纹样，装饰在被面、包袱布、衣襟的边缘" }
+];
+
+async function loadPatterns() {
+    try { var r = await fetch('data/patterns.json'); if (!r.ok) throw new Error(); allPatterns = await r.json(); }
+    catch(e) { console.warn('fetch failed, using fallback'); allPatterns = FALLBACK_PATTERNS; }
+    renderAll();
+}
+
+function getFilteredPatterns() {
+    return allPatterns.filter(function(p) {
+        var mc = currentCategory === '全部' || p.category === currentCategory;
+        var q = currentSearch.toLowerCase();
+        var ms = !q || p.name.toLowerCase().indexOf(q) >= 0 || p.meaning.toLowerCase().indexOf(q) >= 0 || p.symbolism.toLowerCase().indexOf(q) >= 0 || p.usage.toLowerCase().indexOf(q) >= 0;
+        return mc && ms;
+    });
+}
+
+function renderPatternCards(patterns) {
+    patternGrid.innerHTML = '';
+    if (patterns.length === 0) { patternGrid.style.display = 'none'; emptyState.style.display = 'block'; return; }
+    patternGrid.style.display = ''; emptyState.style.display = 'none';
+    var countEl = document.createElement('div'); countEl.className = 'pattern-grid__count';
+    countEl.innerHTML = '共 <strong>' + patterns.length + '</strong> 个纹样'; patternGrid.appendChild(countEl);
+    patterns.forEach(function(p, i) {
+        var card = document.createElement('div'); card.className = 'pattern-card';
+        card.style.animationDelay = (i * 0.06) + 's';
+        card.addEventListener('click', function() { openModal(p); });
+        var hasImage = p.image && p.image.trim() !== '';
+        var imageHTML = hasImage
+            ? '<div class="pattern-card__image has-image"><img src="' + p.image + '" alt="' + p.name + '" loading="lazy" onerror="this.parentElement.classList.remove(&quot;has-image&quot;)"><span class="pattern-card__image-text">' + p.name + '</span></div>'
+            : '<div class="pattern-card__image"><span class="pattern-card__image-text">' + p.name + '</span></div>';
+        card.innerHTML = imageHTML + '<div class="pattern-card__body"><h3 class="pattern-card__name">' + p.name + '</h3><span class="pattern-card__category">' + p.category + '</span></div>';
+        patternGrid.appendChild(card);
+    });
+}
+
+function openModal(pattern) {
+    modalTitle.textContent = pattern.name; modalCategory.textContent = pattern.category;
+    modalMeaning.textContent = pattern.meaning; modalSymbolism.textContent = pattern.symbolism; modalUsage.textContent = pattern.usage;
+    var hasImage = pattern.image && pattern.image.trim() !== '';
+    if (hasImage) { modalImage.className = 'modal__image has-image'; modalImage.innerHTML = '<img src="' + pattern.image + '" alt="' + pattern.name + '" onerror="this.parentElement.classList.remove(&quot;has-image&quot;)">'; }
+    else { modalImage.className = 'modal__image'; modalImage.innerHTML = '<div class="modal__image-placeholder">' + pattern.name + '</div>'; }
+    modalOverlay.classList.add('modal-overlay--visible'); document.body.style.overflow = 'hidden'; modalClose.focus();
+}
+
+function closeModal() { modalOverlay.classList.remove('modal-overlay--visible'); document.body.style.overflow = ''; }
+
+function renderAll() { renderPatternCards(getFilteredPatterns()); }
+
+categoryFilters.addEventListener('click', function(e) {
+    var btn = e.target.closest('.filter-bar__cat'); if (!btn) return;
+    document.querySelectorAll('.filter-bar__cat').forEach(function(b) { b.classList.remove('filter-bar__cat--active'); });
+    btn.classList.add('filter-bar__cat--active');
+    currentCategory = btn.dataset.category; renderAll();
+});
+
+var searchTimeout;
+searchInput.addEventListener('input', function() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(function() { currentSearch = searchInput.value.trim(); renderAll(); }, 250);
+});
+
+modalClose.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', function(e) { if (e.target === modalOverlay) closeModal(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modalOverlay.classList.contains('modal-overlay--visible')) closeModal(); });
+
+loadPatterns();

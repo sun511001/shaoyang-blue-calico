@@ -186,6 +186,8 @@ input { font-family: inherit; }
     transition: var(--transition);
     position: relative;
     white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .nav__tab:hover {
@@ -1355,6 +1357,20 @@ input { font-family: inherit; }
 .ws-result__score { font-size:40px; font-weight:700; color:var(--indigo-dark); letter-spacing:2px; }
 .ws-result__title { font-family:var(--font-heading); font-size:22px; color:var(--indigo-dark); letter-spacing:3px; margin:8px 0 16px; min-height:28px; }
 .ws-result__msg { font-size:14px; color:var(--text-secondary); letter-spacing:1px; line-height:1.8; margin-bottom:28px; }
+
+/* ---------- Homepage Portal ---------- */
+.home-portal { max-width:900px; margin:0 auto; padding:40px 24px 60px; }
+.home-portal__title { font-family:var(--font-heading); font-size:26px; color:var(--indigo-dark); letter-spacing:4px; text-align:center; margin-bottom:8px; }
+.home-portal__subtitle { font-size:14px; color:var(--text-muted); text-align:center; letter-spacing:2px; margin-bottom:40px; }
+.home-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.home-card { background:var(--white); border-radius:var(--radius-md); border:1px solid var(--border); padding:36px 24px; text-align:center; cursor:pointer; transition:all 0.3s ease; text-decoration:none; display:block; box-shadow:var(--shadow-sm); }
+.home-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-md); border-color:var(--indigo-light); }
+.home-card__icon { font-size:48px; display:block; margin-bottom:16px; }
+.home-card__title { font-family:var(--font-heading); font-size:18px; color:var(--indigo-dark); letter-spacing:3px; margin-bottom:6px; }
+.home-card__desc { font-size:13px; color:var(--text-muted); letter-spacing:1px; }
+
+@media (max-width:768px) { .home-grid { grid-template-columns:repeat(2,1fr); gap:16px; } }
+@media (max-width:480px) { .home-grid { grid-template-columns:1fr; } }
 
 /* ---------- Products ---------- */
 .product-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
