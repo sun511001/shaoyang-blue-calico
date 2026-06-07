@@ -113,20 +113,43 @@ function step1(area) {
 
 /* ---------- Step 2: Carve ---------- */
 function step2(area) {
-    var cnt=0, total=40, drawing=false, done=false;
-    area.innerHTML = '<div class="ws-task"><h3 class="ws-task__title">第2关 · 镂刻花版</h3><p class="ws-task__hint">按住鼠标沿花纹轮廓描一遍（覆盖超过70%即过关）</p><div class="ws-carve"><svg viewBox="0 0 300 160" class="ws-carve__svg"><path d="M40,80 Q90,20 150,80 T260,80" fill="none" stroke="var(--indigo-light)" stroke-width="2" stroke-dasharray="8,4"/><path d="M40,80 Q90,20 150,80 T260,80" fill="none" stroke="transparent" stroke-width="28" id="ws-hit"/></svg><div class="ws-carve__progress"><div class="ws-carve__progress-bar" id="ws-bar" style="width:0%"></div></div><p class="ws-carve__pct" id="ws-pct">0%</p></div><div id="ws-fb2"></div></div>';
+    var coverage=0, drawing=false, done=false, lastX=0, lastY=0;
+    area.innerHTML = '<div class="ws-task"><h3 class="ws-task__title">第2关 · 镂刻花版</h3><p class="ws-task__hint">按住鼠标拖动，沿花纹轮廓描一遍（覆盖超过70%即过关）</p><div class="ws-carve"><svg viewBox="0 0 300 160" class="ws-carve__svg"><path d="M40,80 Q90,20 150,80 T260,80" fill="none" stroke="var(--indigo-light)" stroke-width="3" stroke-dasharray="10,5"/><path d="M40,80 Q90,20 150,80 T260,80" fill="none" stroke="transparent" stroke-width="36" id="ws-hit"/></svg><div class="ws-carve__progress"><div class="ws-carve__progress-bar" id="ws-bar" style="width:0%"></div></div><p class="ws-carve__pct" id="ws-pct">0%</p></div><div id="ws-fb2"></div></div>';
     var hit = area.querySelector('#ws-hit'), bar = area.querySelector('#ws-bar'), pctEl = area.querySelector('#ws-pct');
-    function add() {
-        if (done) return; cnt++;
-        var p = Math.min(Math.round(cnt/total*100),100);
+
+    function addCoverage(dist) {
+        if (done) return;
+        coverage += dist * 0.8;
+        if (coverage > 100) coverage = 100;
+        var p = Math.round(coverage);
         bar.style.width = p+'%'; pctEl.textContent = p+'%';
         if (p>=70) { done=true; game.score++; area.querySelector('#ws-fb2').innerHTML='<div class="ws-fb ws-fb--ok">✅ 刻版完成！线条流畅！</div>'; stepDone(area); }
     }
-    hit.addEventListener('mousedown',function(e){e.preventDefault();drawing=true;add();});
-    hit.addEventListener('mouseenter',function(){if(drawing)add();});
+
+    // Mouse
+    hit.addEventListener('mousedown',function(e){
+        e.preventDefault(); drawing=true; lastX=e.clientX; lastY=e.clientY;
+    });
+    hit.addEventListener('mousemove',function(e){
+        if(!drawing) return;
+        var dx=e.clientX-lastX, dy=e.clientY-lastY;
+        var dist = Math.sqrt(dx*dx+dy*dy);
+        if(dist>1) { addCoverage(dist); lastX=e.clientX; lastY=e.clientY; }
+    });
     document.addEventListener('mouseup',function(){drawing=false;});
-    hit.addEventListener('touchstart',function(e){e.preventDefault();drawing=true;add();});
-    hit.addEventListener('touchmove',function(e){e.preventDefault();if(drawing)add();});
+
+    // Touch
+    hit.addEventListener('touchstart',function(e){
+        e.preventDefault(); drawing=true;
+        var t=e.touches[0]; lastX=t.clientX; lastY=t.clientY;
+    });
+    hit.addEventListener('touchmove',function(e){
+        e.preventDefault();
+        if(!drawing) return;
+        var t=e.touches[0], dx=t.clientX-lastX, dy=t.clientY-lastY;
+        var dist = Math.sqrt(dx*dx+dy*dy);
+        if(dist>1) { addCoverage(dist); lastX=t.clientX; lastY=t.clientY; }
+    });
     hit.addEventListener('touchend',function(){drawing=false;});
 }
 
