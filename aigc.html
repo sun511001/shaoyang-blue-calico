@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邵阳蓝印花布 · AIGC 纹样生成</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header__ornament header__ornament--top">
+            <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+                <defs>
+                    <pattern id="meander" x="0" y="0" width="60" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M0,20 L10,20 L10,5 L20,5 L20,35 L30,35 L30,5 L40,5 L40,20 L50,20 L50,5 L60,5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                    </pattern>
+                </defs>
+                <rect width="1200" height="40" fill="url(#meander)" opacity="0.4"/>
+            </svg>
+        </div>
+        <div class="header__content">
+            <div class="header__decor header__decor--left">
+                <svg width="80" height="120" viewBox="0 0 80 120">
+                    <circle cx="40" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                    <circle cx="40" cy="60" r="22" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+                    <text x="40" y="67" text-anchor="middle" font-size="28" fill="currentColor" opacity="0.6">AI</text>
+                </svg>
+            </div>
+            <div class="header__text">
+                <h1 class="header__title">
+                    <span class="header__title-main">AIGC 纹样生成</span>
+                    <span class="header__title-sub">人工智能 × 非遗传承 · 创意无限</span>
+                </h1>
+                <p class="header__desc">以 AIGC 为核心引擎，将传统纹样的美学基因与生成式 AI 结合，通过风格迁移与元素重组，打破创作边界，实现传统美学与未来科技的深度融合，为非遗注入全新生命力。</p>
+            </div>
+            <div class="header__decor header__decor--right">
+                <svg width="80" height="120" viewBox="0 0 80 120">
+                    <circle cx="40" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                    <circle cx="40" cy="60" r="22" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+                    <text x="40" y="67" text-anchor="middle" font-size="28" fill="currentColor" opacity="0.6">创</text>
+                </svg>
+            </div>
+        </div>
+        <div class="header__ornament header__ornament--bottom">
+            <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+                <rect width="1200" height="40" fill="url(#meander)" opacity="0.4"/>
+            </svg>
+        </div>
+    </header>
+
+    <!-- 导航栏 -->
+    <nav class="nav">
+        <div class="nav__tabs">
+            <a href="index.html" class="nav__tab">
+                <svg class="nav__icon" width="20" height="20" viewBox="0 0 20 20"><path d="M10 2L2 9h2v7h5v-4h2v4h5V9h2L10 2z" fill="currentColor"/></svg>
+                首页
+            </a>
+            <a href="gallery.html" class="nav__tab">
+                <svg class="nav__icon" width="20" height="20" viewBox="0 0 20 20"><rect x="2" y="2" width="7" height="7" rx="1" fill="currentColor" opacity="0.7"/><rect x="11" y="2" width="7" height="7" rx="1" fill="currentColor" opacity="0.7"/><rect x="2" y="11" width="7" height="7" rx="1" fill="currentColor" opacity="0.7"/><rect x="11" y="11" width="7" height="7" rx="1" fill="currentColor" opacity="0.7"/></svg>
+                纹样图鉴
+            </a>
+            <a href="process.html" class="nav__tab">
+                <svg class="nav__icon" width="20" height="20" viewBox="0 0 20 20"><circle cx="5" cy="5" r="2.5" fill="currentColor"/><circle cx="10" cy="10" r="2" fill="currentColor"/><circle cx="15" cy="15" r="2.5" fill="currentColor"/><line x1="7" y1="5.5" x2="8.5" y2="9" stroke="currentColor" stroke-width="1"/><line x1="11.5" y1="11" x2="13" y2="13.5" stroke="currentColor" stroke-width="1"/></svg>
+                制作工艺
+            </a>
+            <a href="survey.html" class="nav__tab">
+                <svg class="nav__icon" width="20" height="20" viewBox="0 0 20 20"><rect x="3" y="2" width="14" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="6" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/><line x1="6" y1="10.5" x2="14" y2="10.5" stroke="currentColor" stroke-width="1"/><line x1="6" y1="14" x2="10" y2="14" stroke="currentColor" stroke-width="1"/></svg>
+                问卷收集
+            </a>
+            <a href="visualize.html" class="nav__tab">
+                <svg class="nav__icon" width="20" height="20" viewBox="0 0 20 20"><rect x="2" y="12" width="3" height="6" rx="0.5" fill="currentColor"/><rect x="6.5" y="6" width="3" height="12" rx="0.5" fill="currentColor"/><rect x="11" y="9" width="3" height="9" rx="0.5" fill="currentColor"/><rect x="15.5" y="3" width="3" height="15" rx="0.5" fill="currentColor"/></svg>
+                数据可视
+            </a>
+            <a href="game.html" class="nav__tab">
+                <svg class="nav__icon" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 14,7 13,13 7,13 6,7" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="10" cy="8" r="1.5" fill="currentColor"/></svg>
+                趣味闯关
+            </a>
+            <a href="products.html" class="nav__tab">
+                <svg class="nav__icon" width="20" height="20" viewBox="0 0 20 20"><rect x="2" y="6" width="16" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 6V4a4 4 0 018 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                成果展示
+            </a>
+            <a href="aigc.html" class="nav__tab nav__tab--active">
+                <svg class="nav__icon" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M7 10l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="2" fill="currentColor" opacity="0.5"/></svg>
+                AI 生成
+            </a>
+        </div>
+    </nav>
+
+    <!-- 面包屑 -->
+    <div class="page-nav">
+        <a href="index.html" class="page-nav__back">🏠 首页</a>
+        <span class="page-nav__sep">&gt;</span> AIGC 纹样生成
+    </div>
+
+    <main class="main">
+        <!-- 技术介绍卡片 -->
+        <section class="section" id="section-intro">
+            <h2 class="section__title">
+                <span class="section__title-decor left"></span>
+                三大 AI 技术引擎
+                <span class="section__title-decor right"></span>
+            </h2>
+            <p class="section__subtitle">以 AIGC 为核心，让非遗纹样焕发新生</p>
+            <div class="aigc-tech-grid">
+                <div class="aigc-tech-card">
+                    <div class="aigc-tech-card__icon">🚀</div>
+                    <h3 class="aigc-tech-card__title">生成式 AI</h3>
+                    <p class="aigc-tech-card__desc">Midjourney 等工具快速生成海量方案，激发创意灵感。</p>
+                </div>
+                <div class="aigc-tech-card">
+                    <div class="aigc-tech-card__icon">🎯</div>
+                    <h3 class="aigc-tech-card__title">精准控制</h3>
+                    <p class="aigc-tech-card__desc">ControlNet 插件把控构图细节，确保纹样主题精准呈现。</p>
+                </div>
+                <div class="aigc-tech-card">
+                    <div class="aigc-tech-card__icon">🧠</div>
+                    <h3 class="aigc-tech-card__title">模型微调</h3>
+                    <p class="aigc-tech-card__desc">Fine-tuning 训练专属模型，让创作更贴合非遗文化内核。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AIGC 生成区 -->
+        <section class="section" id="section-generate">
+            <h2 class="section__title">
+                <span class="section__title-decor left"></span>
+                在线体验 · AI 纹样生成
+                <span class="section__title-decor right"></span>
+            </h2>
+            <p class="section__subtitle">输入主题词，选择风格，AI 即刻创作</p>
+            <div id="aigc-container"></div>
+        </section>
+
+        <!-- 技术路线 -->
+        <section class="section" id="section-roadmap">
+            <h2 class="section__title">
+                <span class="section__title-decor left"></span>
+                数字化保护技术体系
+                <span class="section__title-decor right"></span>
+            </h2>
+            <p class="section__subtitle">建立标准化采集、著录与存储体系，构建"数字基因库"</p>
+            <div class="aigc-tech-grid aigc-tech-grid--roadmap">
+                <div class="aigc-tech-card aigc-tech-card--roadmap">
+                    <div class="aigc-tech-card__icon">📡</div>
+                    <h3 class="aigc-tech-card__title">高精采集</h3>
+                    <p class="aigc-tech-card__desc">运用三维激光扫描等技术，高精度还原纹样的细节与质感。</p>
+                </div>
+                <div class="aigc-tech-card aigc-tech-card--roadmap">
+                    <div class="aigc-tech-card__icon">📋</div>
+                    <h3 class="aigc-tech-card__title">标准著录</h3>
+                    <p class="aigc-tech-card__desc">完善元数据体系，规范信息描述，确保资源可查、可溯。</p>
+                </div>
+                <div class="aigc-tech-card aigc-tech-card--roadmap">
+                    <div class="aigc-tech-card__icon">🔒</div>
+                    <h3 class="aigc-tech-card__title">安全存储</h3>
+                    <p class="aigc-tech-card__desc">采用无损格式存档与多重备份机制，永久守护文化资产。</p>
+                </div>
+            </div>
+            <p class="aigc-roadmap-note">严格遵循《非物质文化遗产数字化保护》国家标准，建立标准化的采集、著录与存储体系，为非遗资源构建完整、真实、可靠的"数字基因库"，筑牢传承根基。</p>
+        </section>
+    </main>
+
+    <section class="about" id="section-about">
+        <div class="about__inner">
+            <h2 class="about__title">关于我们</h2>
+            <p class="about__subtitle">三下乡社会实践团队 · 湖南邵阳</p>
+            <div class="about__cards">
+                <div class="about__card"><div class="about__card-icon">🏫</div><h3>实践背景</h3><p>我们是一支关注非物质文化遗产保护的大学生三下乡社会实践团队，深入湖南邵阳地区，探访蓝印花布传统印染技艺的传承现状。</p></div>
+                <div class="about__card"><div class="about__card-icon">🎯</div><h3>项目目标</h3><p>通过实地调研、影像记录和数字化展示，让更多人了解邵阳蓝印花布的文化价值，唤起社会对非遗保护的关注与参与。</p></div>
+                <div class="about__card"><div class="about__card-icon">🤝</div><h3>联系方式</h3><p>如果您对蓝印花布非遗保护有任何建议或合作意向，欢迎通过问卷留言与我们交流，共同守护这份珍贵的文化遗产。</p></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__ornament">
+            <svg viewBox="0 0 1200 30" preserveAspectRatio="none">
+                <rect width="1200" height="30" fill="url(#meander)" opacity="0.3"/>
+            </svg>
+        </div>
+        <div class="footer__content">
+            <p class="footer__text">邵阳蓝印花布 · 非物质文化遗产传承</p>
+            <p class="footer__sub">三下乡社会实践项目 · 湖南邵阳</p>
+            <p class="footer__copy">(c) 2026 蓝印花布非遗保护 · 传承匠心之美</p>
+        </div>
+    </footer>
+
+    <script src="js/aigc.js"></script>
+</body>
+</html>
