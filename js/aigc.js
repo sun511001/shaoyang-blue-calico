@@ -12,26 +12,26 @@ const STYLE_TEMPLATES = {
   blue_calico: {
     label: '蓝印花布',
     icon: '🔵',
-    prefix: 'traditional Chinese blue calico pattern, indigo blue and white, ',
-    suffix: ', Shao Yang folk art, intangible cultural heritage, clean linework, symmetrical composition, fabric texture, traditional Chinese textile pattern',
+    prefix: 'A traditional Chinese blue calico textile pattern featuring ',
+    suffix: ', indigo blue on white cotton fabric, symmetrical folk art design, Shaoyang intangible cultural heritage style, clean bold lines, decorative border patterns',
   },
   paper_cut: {
     label: '传统剪纸',
     icon: '✂️',
-    prefix: 'traditional Chinese paper-cut art style, red and white, ',
-    suffix: ', folk art paper cutting, intricate cutout patterns, festive decoration style',
+    prefix: 'A traditional Chinese paper-cut artwork depicting ',
+    suffix: ', intricate cutout design on red paper, folk art style, delicate symmetrical pattern',
   },
   embroidery: {
     label: '刺绣纹样',
     icon: '🧵',
-    prefix: 'traditional Chinese silk embroidery pattern, colorful silk threads, ',
-    suffix: ', exquisite embroidery artwork, textile art, delicate stitching details',
+    prefix: 'An exquisite Chinese silk embroidery design of ',
+    suffix: ', colorful threads on fabric, delicate stitching details, traditional textile art pattern',
   },
   ink: {
     label: '水墨风格',
     icon: '🖌️',
-    prefix: 'traditional Chinese ink wash painting style, black ink on rice paper, ',
-    suffix: ', Chinese brush painting, artistic, flowing lines, minimalist elegance',
+    prefix: 'A Chinese ink wash painting of ',
+    suffix: ', black ink on rice paper, flowing brush strokes, minimalist artistic style, elegant composition',
   },
 };
 
