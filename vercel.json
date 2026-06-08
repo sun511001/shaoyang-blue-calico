@@ -1,20 +1,9 @@
 {
   "functions": {
     "api/generate.js": {
-      "maxDuration": 60
+      "runtime": "nodejs18.x",
+      "maxDuration": 60,
+      "memory": 512
     }
-  },
-  "rewrites": [
-    { "source": "/api/generate", "destination": "/api/generate" }
-  ],
-  "headers": [
-    {
-      "source": "/api/(.*)",
-      "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Access-Control-Allow-Methods", "value": "POST, OPTIONS" },
-        { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
-      ]
-    }
-  ]
+  }
 }
