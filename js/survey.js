@@ -114,7 +114,7 @@ function bindSurveyEvents(container) {
 }
 
 // ==================== Submit handler ====================
-function handleSubmit() {
+async function handleSubmit() {
     const response = { timestamp: new Date().toISOString(), answers: [] };
     let allAnswered = true;
 
@@ -139,10 +139,31 @@ function handleSubmit() {
         return;
     }
 
-    // Save to localStorage
+    // Save to localStorage (always, as fallback)
     const responses = getSurveyResponses();
     responses.push(response);
     localStorage.setItem(SURVEY_KEY, JSON.stringify(responses));
+
+    // Also POST to server (if available)
+    try {
+      const token = localStorage.getItem('auth_token');
+      const headers = { 'Content-Type': 'application/json' };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+
+      const serverResp = await fetch('/api/survey', {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ answers: response.answers }),
+      });
+
+      if (serverResp.ok) {
+        const data = await serverResp.json();
+        // Sync server count to localStorage
+        localStorage.setItem('survey_server_count', data.total);
+      }
+    } catch {
+      // Server unreachable — localStorage data is still saved
+    }
 
     // Show result
     showSurveyResult();

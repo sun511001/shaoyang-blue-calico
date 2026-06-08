@@ -237,7 +237,7 @@ async function generateImage(rawPrompt, styleKey, container) {
       img.style.display = 'block';
       loadingDiv.style.display = 'none';
 
-      // 保存历史
+      // 保存历史到 localStorage
       saveToHistory({
         prompt: rawPrompt,
         style: styleKey,
@@ -246,6 +246,26 @@ async function generateImage(rawPrompt, styleKey, container) {
         image: data.image,
         timestamp: new Date().toISOString(),
       });
+
+      // 同步到服务器（如果已登录）
+      try {
+        const token = localStorage.getItem('auth_token');
+        if (token) {
+          await fetch('/api/history', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              prompt: rawPrompt,
+              style: styleKey,
+              image: data.image,
+            }),
+          });
+        }
+      } catch { /* 服务器不可用时静默降级 */ }
+
       renderHistory();
     } else {
       throw new Error('未收到图片数据');

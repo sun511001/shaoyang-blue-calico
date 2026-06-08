@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 · 邵阳蓝印花布</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header__ornament header__ornament--top">
+            <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+                <defs>
+                    <pattern id="meander" x="0" y="0" width="60" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M0,20 L10,20 L10,5 L20,5 L20,35 L30,35 L30,5 L40,5 L40,20 L50,20 L50,5 L60,5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                    </pattern>
+                </defs>
+                <rect width="1200" height="40" fill="url(#meander)" opacity="0.4"/>
+            </svg>
+        </div>
+        <div class="header__content">
+            <div class="header__text">
+                <h1 class="header__title">
+                    <span class="header__title-main">邵阳蓝印花布</span>
+                    <span class="header__title-sub">非物质文化遗产 · 用户中心</span>
+                </h1>
+            </div>
+        </div>
+        <div class="header__ornament header__ornament--bottom">
+            <svg viewBox="0 0 1200 40" preserveAspectRatio="none">
+                <rect width="1200" height="40" fill="url(#meander)" opacity="0.4"/>
+            </svg>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="nav__tabs">
+            <a href="index.html" class="nav__tab">🏠 首页</a>
+            <a href="gallery.html" class="nav__tab">🖼️ 纹样图鉴</a>
+            <a href="aigc.html" class="nav__tab">🤖 AI 生成</a>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="auth-container" id="auth-container">
+            <!-- JS 动态渲染 -->
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__ornament">
+            <svg viewBox="0 0 1200 30" preserveAspectRatio="none">
+                <rect width="1200" height="30" fill="url(#meander)" opacity="0.3"/>
+            </svg>
+        </div>
+        <div class="footer__content">
+            <p class="footer__text">邵阳蓝印花布 · 非物质文化遗产传承</p>
+            <p class="footer__copy">(c) 2026 蓝印花布非遗保护 · 传承匠心之美</p>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>
